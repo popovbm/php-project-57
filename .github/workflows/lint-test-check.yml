@@ -1,4 +1,4 @@
-name: lint-test-checks
+name: lint-test-check
 on: push
 jobs:
   build:
