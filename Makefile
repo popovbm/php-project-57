@@ -1,5 +1,4 @@
-setup:
-	migrate
+setup: install build-assets migrate
 
 install:
 	composer install
@@ -22,3 +21,7 @@ test-coverage:
 
 migrate:
 	php artisan migrate --force
+
+build-assets:
+	npm ci
+	npm run build
