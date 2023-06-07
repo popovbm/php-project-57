@@ -832,7 +832,9 @@
 
 <body class="antialiased">
     @if (session()->has('message'))
-    <p>{{ session('message') }}</p>
+    <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+        <p>{{ session('message') }}</p>
+    </div>
     @endif
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         @if (Route::has('login'))
