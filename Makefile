@@ -1,5 +1,5 @@
-start:
-	php artisan migrate
+setup:
+	migrate
 
 install:
 	composer install
@@ -19,3 +19,6 @@ test:
 
 test-coverage:
 	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+
+migrate:
+	php artisan migrate --force
