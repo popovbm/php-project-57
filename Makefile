@@ -1,7 +1,7 @@
-setup: install-deps build-assets migrate
+setup: install-deps build-assets generate-app-key migrate run-fill-db
 
 install-deps:
-	composer install --ignore-platform-reqs
+	composer install
 
 validate:
 	composer validate
@@ -25,3 +25,9 @@ migrate:
 build-assets:
 	npm ci
 	npm run build
+
+generate-app-key:
+	php artisan key:generate
+
+run-fill-db:
+	php artisan db:seed --force
