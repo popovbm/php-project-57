@@ -1,5 +1,5 @@
 start:
-	php artisan serve
+	php artisan migrate
 
 install:
 	composer install
