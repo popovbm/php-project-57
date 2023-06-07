@@ -17,7 +17,6 @@ use App\Mail\OrderShipped;
 */
 
 Route::get('/', function () {
-    // Mail::to('popovbm@gmail.com')->send(new OrderShipped());
     return view('welcome');
 });
 

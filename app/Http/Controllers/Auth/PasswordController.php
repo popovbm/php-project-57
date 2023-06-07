@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewPassword;
 
 class PasswordController extends Controller
 {
@@ -25,6 +27,8 @@ class PasswordController extends Controller
         ]);
 
         session()->flash('message', 'Password successfully changed');
+
+        Mail::to($request->user())->send(new NewPassword($validated['password']));
 
         return back()->with('status', 'password-updated');
     }

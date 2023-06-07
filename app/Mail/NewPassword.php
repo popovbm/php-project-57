@@ -7,18 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
-class OrderShipped extends Mailable
+class NewPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
-    {
+    public function __construct(
+        public $password
+    ) {
+        //
     }
 
     /**
@@ -28,7 +30,7 @@ class OrderShipped extends Mailable
     {
         return new Envelope(
             from: new Address('popov@example.com', 'Ivan Popov'),
-            subject: 'test',
+            subject: 'You have reset your password in Task Manager',
         );
     }
 
@@ -38,7 +40,7 @@ class OrderShipped extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.test',
+            view: 'emails.new-password',
         );
     }
 
