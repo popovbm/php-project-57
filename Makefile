@@ -1,7 +1,7 @@
-setup: install build-assets migrate
+setup: install-deps build-assets migrate
 
-install:
-	composer install
+install-deps:
+	composer install --ignore-platform-reqs
 
 validate:
 	composer validate
