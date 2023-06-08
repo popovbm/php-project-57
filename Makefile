@@ -1,4 +1,5 @@
 setup: install-deps build-assets generate-app-key migrate run-fill-db
+start: migrate serve
 
 install-deps:
 	composer install
@@ -31,3 +32,6 @@ generate-app-key:
 
 run-fill-db:
 	php artisan db:seed --force
+
+serve:
+	php artisan serve --host=0.0.0.0
