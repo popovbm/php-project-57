@@ -11,7 +11,7 @@ class StoreTaskStatusRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,20 @@ class StoreTaskStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'unique:task_statuses'],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => 'Статус с таким именем уже существует',
+            'name.required' => 'Это обязательное поле',
         ];
     }
 }
