@@ -34,8 +34,8 @@ class StoreTaskStatusRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.unique' => 'Статус с таким именем уже существует',
-            'name.required' => 'Это обязательное поле',
+            'name.unique' => __('auth.unique_error'),
+            'name.required' => __('auth.required_error'),
         ];
     }
 }

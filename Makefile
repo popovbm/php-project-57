@@ -1,5 +1,5 @@
 setup: install-deps build-assets generate-app-key migrate run-fill-db
-start: migrate seed serve
+start: drop-migrate-seed serve
 
 install-deps:
 	composer install
@@ -20,18 +20,8 @@ test:
 test-coverage:
 	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
 
-migrate:
-	php artisan migrate --force
-
-build-assets:
-	npm ci
-	npm run build
-
-generate-app-key:
-	php artisan key:generate
-
-run-fill-db:
-	php artisan db:seed --force
+drop-migrate-seed:
+	php artisan migrate:refresh --seed --force
 
 serve:
 	php artisan serve --host=0.0.0.0 --port=$(PORT)

@@ -47,8 +47,8 @@ class ProfileController extends Controller
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
         ], [
-            'password.required' => 'Поле: "Пароль" не может быть пустым',
-            'password.current_password' => 'Введеный пароль недействительный',
+            'password.required' => __('auth.required_error'),
+            'password.current_password' => __('auth.password'),
         ]);
 
         $user = $request->user();
@@ -60,7 +60,7 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        session()->flash('message', 'Profile deleted successfully');
+        session()->flash('message', __('layout.profile_delete_successful'));
 
         return Redirect::to('/');
     }

@@ -18,6 +18,7 @@
                 </div>
                 <div class="mt-2">
                     {{ Form::submit('Создать', ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
+                    <a class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' href="{{ route('task_statuses.index')}}">Назад</a>
                 </div>
                 {{ Form::close() }}
             </div>

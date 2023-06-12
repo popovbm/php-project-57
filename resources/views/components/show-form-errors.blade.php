@@ -1,4 +1,4 @@
-<p style="color:red">Упс! Что-то пошло не так:</p>
+<p style="color:red">{{ __('layout.oops') }}</p>
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
