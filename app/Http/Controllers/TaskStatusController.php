@@ -6,10 +6,19 @@ use App\Http\Requests\StoreTaskStatusRequest;
 use App\Http\Requests\UpdateTaskStatusRequest;
 use App\Models\TaskStatus;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TaskStatusController extends Controller
 {
+    /**
+     * Create the controller instance.
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(TaskStatus::class, 'task_status', [
+            'except' => ['index'],
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -25,12 +34,8 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-        if (Auth::user()) {
-            $taskStatus = new TaskStatus();
-            return view('statuses.create', compact('taskStatus'));
-        } else {
-            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
-        }
+        $taskStatus = new TaskStatus();
+        return view('statuses.create', compact('taskStatus'));
     }
 
     /**
@@ -38,28 +43,13 @@ class TaskStatusController extends Controller
      */
     public function store(StoreTaskStatusRequest $request)
     {
-        if (Auth::user()) {
-            $data = $request->validated();
+        $data = $request->validated();
+        $request->user()->taskStatuses()->make($data)->save();
 
-            $newStatus = new TaskStatus();
-            $newStatus->fill($data);
-            $newStatus->save();
+        session()->flash('message', 'New status created successfully');
 
-            session()->flash('message', 'New status created successfully');
-
-            return redirect()
-                ->route('task_statuses.index');
-        } else {
-            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
-        }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(TaskStatus $taskStatus)
-    {
-        //
+        return redirect()
+            ->route('task_statuses.index');
     }
 
     /**
@@ -75,19 +65,16 @@ class TaskStatusController extends Controller
      */
     public function update(UpdateTaskStatusRequest $request, TaskStatus $taskStatus)
     {
-        if (Auth::user()) {
-            $data = $request->validated();
 
-            $taskStatus->fill($data);
-            $taskStatus->save();
+        $data = $request->validated();
 
-            session()->flash('message', 'Status edited successfully');
+        $taskStatus->fill($data);
+        $taskStatus->save();
 
-            return redirect()
-                ->route('task_statuses.index');
-        } else {
-            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
-        }
+        session()->flash('message', 'Status edited successfully');
+
+        return redirect()
+            ->route('task_statuses.index');
     }
 
     /**
@@ -95,16 +82,13 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        if (Auth::user()) {
-            $taskStatusName = $taskStatus->name;
-            $taskStatus->delete();
+        // dd($_REQUEST);
+        $taskStatusName = $taskStatus->name;
+        $taskStatus->delete();
 
-            session()->flash('message', "Status \"{$taskStatusName}\" deleted successfully");
+        session()->flash('message', "Status \"{$taskStatusName}\" deleted successfully");
 
-            return redirect()
-                ->route('task_statuses.index');
-        } else {
-            return abort(403, 'THIS ACTION IS UNAUTHORIZED.');
-        }
+        return redirect()
+            ->route('task_statuses.index');
     }
 }

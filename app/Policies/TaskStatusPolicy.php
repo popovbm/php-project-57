@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class TaskStatusPolicy
 {
@@ -29,7 +30,7 @@ class TaskStatusPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +38,7 @@ class TaskStatusPolicy
      */
     public function update(User $user, TaskStatus $taskStatus): bool
     {
-        //
+        return Auth::check() && $user->id === $taskStatus->creator_id;
     }
 
     /**
@@ -45,7 +46,7 @@ class TaskStatusPolicy
      */
     public function delete(User $user, TaskStatus $taskStatus): bool
     {
-        //
+        return Auth::check() && $user->id === $taskStatus->creator_id;
     }
 
     /**
@@ -62,5 +63,10 @@ class TaskStatusPolicy
     public function forceDelete(User $user, TaskStatus $taskStatus): bool
     {
         //
+    }
+
+    public function seeActions(User $user): bool
+    {
+        return Auth::check();
     }
 }

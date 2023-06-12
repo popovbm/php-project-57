@@ -16,10 +16,10 @@ class TaskStatusSeeder extends Seeder
         TaskStatus::factory()
             ->count(4)
             ->sequence(
-                ['name' => 'новый'],
-                ['name' => 'в работе'],
-                ['name' => 'на тестировании'],
-                ['name' => 'завершен'],
+                ['name' => 'новый', 'creator_id' => 1],
+                ['name' => 'в работе', 'creator_id' => 1],
+                ['name' => 'на тестировании', 'creator_id' => 1],
+                ['name' => 'завершен', 'creator_id' => 1],
             )
             ->create();
     }
