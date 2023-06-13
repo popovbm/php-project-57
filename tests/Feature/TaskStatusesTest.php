@@ -21,10 +21,10 @@ class TaskStatusesTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        $this->wrongUser = User::factory()->create();
         $this->taskStatus = TaskStatus::factory([
             'creator_id' => $this->user->id,
         ])->create();
-        $this->wrongUser = User::factory()->create();
     }
 
     public function test_index(): void
