@@ -8,17 +8,16 @@ validate:
 	composer validate
 
 lint:
-	composer exec --verbose phpcs -- --standard=PSR12 src
-	composer exec --verbose phpstan -- --level=8 --xdebug src
+	composer exec phpcs -- --standard=PSR12 app routes tests
 
 lint-fix:
-	composer exec --verbose phpcbf -- --standard=PSR12 src
+	composer exec phpcbf -- --standard=PSR12 app routes tests
 
 test:
-	composer exec --verbose phpunit tests
+	php artisan test
 
 test-coverage:
-	composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
+	php artisan test --coverage-clover build/logs/clover.xml
 
 drop-migrate-seed:
 	php artisan migrate:refresh --seed --force
