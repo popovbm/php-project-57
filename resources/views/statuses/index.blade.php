@@ -26,10 +26,12 @@
                         <td class="border border-black dark:border-white p-1">{{ $taskStatus->id }}</td>
                         <td class="border border-black dark:border-white p-1">{{ $taskStatus->name }}</td>
                         <td class="border border-black dark:border-white p-1">{{ $taskStatus->created_at->format('d.m.Y') }}</td>
-                        @canany(['delete', 'update'], $taskStatus)
+                        @can('update', $taskStatus)
                         <td class="border border-black dark:border-white p-1">
-                            <a data-confirm="Вы уверены?" class="text-red-600 hover:text-red-900" href="{{ route('task_statuses.destroy', $taskStatus) }}" data-method="delete" rel="nofollow">{{ __('layout.table_delete') }}</a>
                             <a class=" text-blue-600 hover:text-blue-900" href="{{ route('task_statuses.edit', $taskStatus) }}">{{ __('layout.table_edit') }}</a>
+                            @can('delete', $taskStatus)
+                            <a data-confirm="Вы уверены?" class="text-red-600 hover:text-red-900" href="{{ route('task_statuses.destroy', $taskStatus) }}" data-method="delete" rel="nofollow">{{ __('layout.table_delete') }}</a>
+                            @endcan
                         </td>
                         @endcan
                     </tr>

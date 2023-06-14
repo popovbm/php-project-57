@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -46,7 +47,7 @@ class TaskStatusPolicy
      */
     public function delete(User $user, TaskStatus $taskStatus): bool
     {
-        return Auth::check() && $user->id === $taskStatus->creator_id;
+        return Auth::check() && $user->id === $taskStatus->creator_id && empty(Task::firstWhere('status_id', $taskStatus->id));
     }
 
     /**
