@@ -6,6 +6,10 @@
         <div class="grid col-span-full">
             <h1 class="mb-5 text-black dark:text-white text-5xl">Задачи</h1>
 
+            @can('create', App\Models\Task::class)
+            <a class="text-white hover:text-red-900" href="{{ route('tasks.create') }}">{{ __('Создать задачу') }}</a>
+            @endcan
+
             <table class="mt-4 text-black dark:text-white border-collapse border border-slate-500">
                 <thead>
                     <tr>

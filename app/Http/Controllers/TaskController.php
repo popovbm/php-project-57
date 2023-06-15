@@ -6,15 +6,20 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Models\TaskStatus;
+use App\Models\User;
 
 class TaskController extends Controller
 {
+    /**
+     * Create the controller instance.
+     */
     public function __construct()
     {
-        $this->authorizeResource(TaskStatus::class, 'task_status', [
+        $this->authorizeResource(Task::class, 'task', [
             'except' => ['index', 'show'],
         ]);
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -31,7 +36,9 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        return view('tasks.create', compact('task'));
+        $statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        return view('tasks.create', compact('task', 'statuses', 'users'));
     }
 
     /**
@@ -61,7 +68,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return view('statuses.edit', compact('task'));
+        $statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        return view('tasks.edit', compact('task', 'users', 'statuses'));
     }
 
     /**
