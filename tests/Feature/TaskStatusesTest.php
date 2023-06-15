@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Task;
 use App\Models\TaskStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -31,18 +32,20 @@ class TaskStatusesTest extends TestCase
     {
         $response = $this->get(route('task_statuses.index'));
 
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 
     public function test_create_non_auth(): void
     {
         $response = $this->get(route('task_statuses.create'));
+
         $response->assertForbidden();
     }
 
     public function test_create(): void
     {
         $response = $this->actingAs($this->user)->get(route('task_statuses.create'));
+
         $response->assertOk();
     }
 

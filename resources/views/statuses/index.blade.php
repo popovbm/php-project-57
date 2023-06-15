@@ -38,6 +38,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="mt-4 grid col-span-full">
+                {{ $taskStatuses->links() }}
+            </div>
         </div>
     </div>
 </section>

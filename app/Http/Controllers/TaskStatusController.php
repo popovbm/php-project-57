@@ -82,7 +82,6 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        // dd($_REQUEST);
         $taskStatusName = $taskStatus->name;
         $taskStatus->delete();
 
