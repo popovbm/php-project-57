@@ -47,6 +47,7 @@ class TaskController extends Controller
     public function store(StoreTaskRequest $request)
     {
         $data = $request->validated();
+
         $request->user()->tasks()->make($data)->save();
 
         session()->flash('message', 'New task created successfully');
@@ -80,8 +81,7 @@ class TaskController extends Controller
     {
         $data = $request->validated();
 
-        $task->fill($data);
-        $task->save();
+        $task->fill($data)->save();
 
         session()->flash('message', 'Task edited successfully');
 

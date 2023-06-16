@@ -11,7 +11,7 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +19,13 @@ class UpdateTaskRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'name' => ['required', 'max:255'],
+            'description' => 'max:255',
+            'status_id' => 'required',
+            'assigned_to_id' => ['nullable', 'exists:users,id'],
         ];
     }
 }

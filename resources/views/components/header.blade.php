@@ -10,17 +10,17 @@
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                     <li>
                         <a href="{{ route('tasks.index') }}" class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0">
-                            {{ __('layout.tasks') }}
+                            {{ __('layout.nav.tasks') }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('task_statuses.index') }}" class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0">
-                            {{ __('layout.task_statuses') }}
+                            {{ __('layout.nav.task_statuses') }}
                         </a>
                     </li>
                     <li>
                         <a href="/" class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0">
-                            {{ __('layout.labels') }}
+                            {{ __('layout.nav.labels') }}
                         </a>
                     </li>
                 </ul>

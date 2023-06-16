@@ -21,9 +21,9 @@ class TaskFactory extends Factory
         return [
             'name' => fake()->unique()->sentence(),
             'description' => fake()->text(100),
-            'status_id' => TaskStatus::find(rand(1, count(TaskStatus::all()))),
-            'created_by_id' => User::find(rand(1, count(User::all()))),
-            'assigned_to_id' => User::find(rand(1, count(User::all()))),
+            'status_id' => TaskStatus::pluck('id')->random(),
+            'created_by_id' => User::pluck('id')->random(),
+            'assigned_to_id' => User::pluck('id')->random(),
         ];
     }
 }
