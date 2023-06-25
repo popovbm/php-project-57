@@ -22,7 +22,12 @@ class UpdateTaskStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:task_statuses'],
+            'name' => [
+                "required",
+                "string",
+                "unique:task_statuses,name,{$this->task_status->id}"
+            ]
+
         ];
     }
 

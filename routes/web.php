@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LabelController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -36,3 +37,4 @@ require __DIR__ . '/auth.php';
 
 Route::resource('task_statuses', TaskStatusController::class);
 Route::resource('tasks', TaskController::class);
+Route::resource('labels', LabelController::class);

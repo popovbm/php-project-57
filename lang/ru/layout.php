@@ -17,10 +17,20 @@ return [
         'show_status' => 'Статус: ',
         'show_description' => 'Описание: ',
         'show_labels' => 'Метки: ',
+        'show_labels_none' => '-',
         'name' => 'Имя',
         'description' => 'Описание',
         'status' => 'Статус',
         'assigned' => 'Исполнитель',
+        'labels' => 'Метки',
+    ],
+    'label' => [
+        'header' => 'Метки',
+        'create' => 'Создать метку',
+        'edit_header' => 'Изменение метки',
+        'create_header' => 'Создать метку',
+        'name' => 'Имя',
+        'description' => 'Описание',
     ],
     'table' => [
         'id' => 'ID',
@@ -39,7 +49,7 @@ return [
         'create' => 'Создать',
         'update' => 'Обновить',
         'create_apply' => 'Применить',
-        'welcome_button' => 'Нажми меня',
+        'welcome' => 'Нажми меня',
         'back' => 'Назад',
         'delete' => 'Удалить',
         'edit' => 'Изменить'
@@ -48,6 +58,11 @@ return [
         'task_statuses' => 'Статусы',
         'tasks' => 'Задачи',
         'labels' => 'Метки'
+    ],
+    'pagination' => [
+        'show' => 'Показано с ',
+        'by' => 'по',
+        'total' => '/ всего:'
     ],
     'delete_question' => 'Вы уверены?',
     'title' => 'Менеджер задач',

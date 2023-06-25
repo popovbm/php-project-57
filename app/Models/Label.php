@@ -7,35 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Task extends Model
+class Label extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
         'description',
-        'status_id',
-        'created_by_id',
-        'assigned_to_id',
     ];
 
-    public function status(): BelongsTo
+    public function tasks(): BelongsToMany
     {
-        return $this->belongsTo(TaskStatus::class);
+        return $this->BelongsToMany(Task::class);
     }
 
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by_id');
-    }
-
-    public function performer(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'assigned_to_id');
-    }
-
-    public function labels(): BelongsToMany
-    {
-        return $this->belongsToMany(Label::class);
     }
 }

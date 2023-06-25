@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTaskRequest extends FormRequest
+class UpdateLabelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,14 +19,11 @@ class UpdateTaskRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name' => ['required', "unique:tasks,name,{$this->task->id}", 'max:255'],
-            'description' => 'max:255',
-            'status_id' => 'required',
-            'assigned_to_id' => ['nullable', 'exists:users,id'],
-            'labels' => ['nullable', 'array'],
+            'name' => ['required', "unique:labels,name,{$this->label->id}", 'max:50'],
+            'description' => ['nullable', 'max:255'],
         ];
     }
 }

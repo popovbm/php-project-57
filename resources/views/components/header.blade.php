@@ -1,5 +1,5 @@
 <header class="w-full">
-    <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900 shadow-md">
+    <nav class="bg-white border-b border-black py-2.5 dark:bg-gray-900 shadow-md">
         <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
             <a href="/" class="flex items-center">
                 <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">{{ __('layout.name') }}</span>
@@ -19,7 +19,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/" class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0">
+                        <a href="{{ route('labels.index') }}" class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0">
                             {{ __('layout.nav.labels') }}
                         </a>
                     </li>

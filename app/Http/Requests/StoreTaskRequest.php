@@ -26,6 +26,7 @@ class StoreTaskRequest extends FormRequest
             'description' => 'max:255',
             'status_id' => 'required',
             'assigned_to_id' => ['nullable', 'exists:users,id'],
+            'labels' => ['nullable', 'array'],
         ];
     }
 }

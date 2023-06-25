@@ -93,7 +93,6 @@ class TaskTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get(route('tasks.edit', $this->task));
 
-
         $response->assertOk();
     }
 
@@ -110,7 +109,7 @@ class TaskTest extends TestCase
             ->patch(route('tasks.update', $this->task), $this->taskData);
 
         $response->assertSessionHasNoErrors();
-        $response->assertRedirect(route('tasks.index'));
+        $response->assertRedirect(route('tasks.show', $this->task));
     }
 
     public function test_destroy_non_auth(): void

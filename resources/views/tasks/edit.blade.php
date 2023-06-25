@@ -34,7 +34,13 @@
                     {{ Form::label('assigned_to_id', __('layout.task.assigned'), ['class' => 'text-black dark:text-white']) }}
                 </div>
                 <div>
-                    {{ Form::select('assigned_to_id', $users, $task->ssigned_to_id, ['class' => 'form-control rounded border-gray-300 w-1/3', 'placeholder' => '----------']) }}
+                    {{ Form::select('assigned_to_id', $users, $task->assigned_to_id, ['class' => 'form-control rounded border-gray-300 w-1/3', 'placeholder' => '----------']) }}
+                </div>
+                <div class="mt-2">
+                    {{ Form::label('labels', __('layout.task.labels'), ['class' => 'text-black dark:text-white']) }}
+                </div>
+                <div>
+                    {{ Form::select('labels[]', $labels, null, ['class' => 'form-control rounded border-gray-300 w-1/3', 'multiple' => 'multiple']) }}
                 </div>
                 <div class="mt-2">
                     {{ Form::submit(__('layout.button.update'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}

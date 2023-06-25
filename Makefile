@@ -1,4 +1,3 @@
-setup: install-deps build-assets generate-app-key migrate run-fill-db
 start: drop-migrate-seed serve
 
 install-deps:

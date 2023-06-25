@@ -46,7 +46,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task): bool
     {
-        return Auth::check() && $task->created_by_id ===  $user->id;
+        return Auth::check() && $task->created_by_id === $user->id;
     }
 
     public function seeActions(User $user): bool

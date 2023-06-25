@@ -19,7 +19,7 @@ class TaskStatusFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'creator_id' => User::find(rand(1, count(User::all()))),
+            'creator_id' => User::pluck('id')->random(),
         ];
     }
 }

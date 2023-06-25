@@ -44,7 +44,7 @@ class TaskStatusController extends Controller
     public function store(StoreTaskStatusRequest $request)
     {
         $data = $request->validated();
-        $request->user()->taskStatuses()->make($data)->save();
+        $request->user()->taskStatuses()->create($data);
 
         session()->flash('message', 'New status created successfully');
 
@@ -65,7 +65,6 @@ class TaskStatusController extends Controller
      */
     public function update(UpdateTaskStatusRequest $request, TaskStatus $taskStatus)
     {
-
         $data = $request->validated();
 
         $taskStatus->fill($data)->save();

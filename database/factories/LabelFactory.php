@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Label>
  */
-class TaskFactory extends Factory
+class LabelFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,9 +20,7 @@ class TaskFactory extends Factory
         return [
             'name' => fake()->unique()->name(),
             'description' => fake()->text(100),
-            'status_id' => TaskStatus::pluck('id')->random(),
             'created_by_id' => User::pluck('id')->random(),
-            'assigned_to_id' => User::pluck('id')->random(),
         ];
     }
 }
