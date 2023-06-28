@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Label;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,10 +18,11 @@ class LabelFactory extends Factory
      */
     public function definition(): array
     {
+        // $label = Label::all()->random();
         return [
             'name' => fake()->unique()->name(),
             'description' => fake()->text(100),
-            'created_by_id' => User::pluck('id')->random(),
+            'created_by_id' => User::all()->random(),
         ];
     }
 }

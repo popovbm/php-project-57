@@ -40,7 +40,7 @@
                     {{ Form::label('labels', __('layout.task.labels'), ['class' => 'text-black dark:text-white']) }}
                 </div>
                 <div>
-                    {{ Form::select('labels[]', $labels, null, ['class' => 'form-control rounded border-gray-300 w-1/3', 'multiple' => 'multiple']) }}
+                    {{ Form::select('labels[]', $labels, $task->labels, ['class' => 'form-control rounded border-gray-300 w-1/3', 'multiple' => 'multiple', 'placeholder' => '']) }}
                 </div>
                 <div class="mt-2">
                     {{ Form::submit(__('layout.button.update'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Testing\Fakes\Fake;
 use Tests\TestCase;
 
 class LabelTest extends TestCase
@@ -23,11 +24,18 @@ class LabelTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->wrongUser = User::factory()->create();
-        $this->label = Label::factory(['created_by_id' => $this->user->id])->create();
-        $this->labelData = Label::factory()->make()->only([
-            'name',
-            'description',
-        ]);
+        $this->label = Label::factory([
+            'created_by_id' => $this->user
+        ])->create();
+        $this->labelData = Label::factory([
+            'name' => fake()->unique()->name(),
+            'description' => fake()->text(100),
+        ])
+            ->make()
+            ->only([
+                'name',
+                'description',
+            ]);
     }
 
     public function test_index(): void
@@ -113,6 +121,8 @@ class LabelTest extends TestCase
     public function test_destroy(): void
     {
         $response = $this->actingAs($this->user)->delete(route('labels.destroy', $this->label));
+
+        $this->assertModelMissing($this->label);
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             TaskStatusSeeder::class,
             LabelSeeder::class,
             TaskSeeder::class,
+            TaskLableSeeder::class,
         ]);
     }
 }

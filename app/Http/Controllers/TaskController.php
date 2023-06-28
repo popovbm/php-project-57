@@ -50,12 +50,18 @@ class TaskController extends Controller
     {
         $data = $request->validated();
 
-        $newTask = $request->user()->tasks()->create($data);
+        $task = $request->user()->tasks()->create($data);
 
-        if (isset($data['labels'])) {
-            $newTask->labels()->attach($data['labels']);
+        if (isset($data['labels'])) { //проверяем выбраны ли в форме лэйблы?
+            if ($data['labels'][0] === null) { // если выбрана первая опция('')
+                if (count($data['labels']) > 1) { // + выбраны другие лэйблы
+                    unset($data['labels'][0]); // убираем первую опцию(null)
+                    $task->labels()->attach($data['labels']); // добавляем к таску оставшиеся лэйблы
+                } // если кроме первой опции('') больше ничего не выбрано, просто чилим :)
+            } else { // если не выбрана первая опция('')
+                $task->labels()->attach($data['labels']); // добавляем к таску выбранные лэйблы
+            }
         }
-
 
         session()->flash('message', 'New task created successfully');
 
@@ -91,10 +97,17 @@ class TaskController extends Controller
 
         $task->fill($data)->save();
 
-        if (isset($data['labels'])) {
-            $task->labels()->sync($data['labels']);
-        } else {
-            $task->labels()->detach();
+        if (isset($data['labels'])) { //проверяем выбраны ли в форме лэйблы?
+            if ($data['labels'][0] === null && count($data['labels']) > 1) { // если выбрана первая опция('') и выбраны ещё другие эл-ты
+                unset($data['labels'][0]); // убираем первую опцию(null)
+                $task->labels()->sync($data['labels']); // синхронизируем
+            } elseif ($data['labels'][0] === null) { // если выбрана только первая опция('')
+                $task->labels()->detach(); // удаляем все лэйблы у таска
+            } else { // иначе просто синхронизируем
+                $task->labels()->sync($data['labels']);
+            }
+        } else { // если в форме не выбран ни один лэйбл
+            $task->labels()->detach(); // удаляем все лэйблы у таска
         }
 
         session()->flash('message', 'Task edited successfully');
@@ -109,6 +122,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $taskName = $task->name;
+        $task->labels()->detach();
         $task->delete();
 
         session()->flash('message', "Task \"{$taskName}\" deleted successfully");
