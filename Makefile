@@ -19,7 +19,7 @@ key:
 	php artisan key:generate
 
 db-prepare:
-	php artisan migrate:refresh --seed --force
+	php artisan migrate:fresh --force --seed
 
 ide-helper:
 	php artisan ide-helper:eloquent
