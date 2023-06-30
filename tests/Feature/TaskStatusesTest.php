@@ -32,35 +32,35 @@ class TaskStatusesTest extends TestCase
         ]);
     }
 
-    public function test_index(): void
+    public function testIndex(): void
     {
         $response = $this->get(route('task_statuses.index'));
 
         $response->assertOk();
     }
 
-    public function test_create_non_auth(): void
+    public function testCreateNonAuth(): void
     {
         $response = $this->get(route('task_statuses.create'));
 
         $response->assertForbidden();
     }
 
-    public function test_create(): void
+    public function testCreate(): void
     {
         $response = $this->actingAs($this->user)->get(route('task_statuses.create'));
 
         $response->assertOk();
     }
 
-    public function test_store_non_auth(): void
+    public function testStoreNonAuth(): void
     {
         $response = $this->post(route('task_statuses.store'), $this->taskStatusData);
 
         $response->assertForbidden();
     }
 
-    public function test_store(): void
+    public function testStore(): void
     {
         $response = $this->actingAs($this->user)->post(route('task_statuses.store'), $this->taskStatusData);
 
@@ -68,49 +68,50 @@ class TaskStatusesTest extends TestCase
         $response->assertRedirect(route('task_statuses.index'));
     }
 
-    public function test_edit_non_auth(): void
+    public function testEditNonAuth(): void
     {
         $response = $this->get(route('task_statuses.edit', $this->taskStatus));
 
         $response->assertForbidden();
     }
 
-    public function test_edit(): void
+    public function testEdit(): void
     {
         $response = $this->actingAs($this->user)->get(route('task_statuses.edit', $this->taskStatus));
 
         $response->assertOk();
     }
 
-    public function test_update_non_auth(): void
+    public function testUpdateNonAuth(): void
     {
         $response = $this->patch(route('task_statuses.update', $this->taskStatus), $this->taskStatusData);
 
         $response->assertForbidden();
     }
 
-    public function test_update(): void
+    public function testUpdate(): void
     {
-        $response = $this->actingAs($this->user)->put(route('task_statuses.update', $this->taskStatus), $this->taskStatusData);
+        $response = $this->actingAs($this->user)
+            ->put(route('task_statuses.update', $this->taskStatus), $this->taskStatusData);
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('task_statuses.index'));
     }
 
-    public function test_destroy_non_auth(): void
+    public function testDestroyNonAuth(): void
     {
         $response = $this->delete(route('task_statuses.destroy', $this->taskStatus));
 
         $response->assertForbidden();
     }
 
-    public function test_destroy_by_wrong_user(): void
+    public function testDestroyByWrongUser(): void
     {
         $response = $this->actingAs($this->wrongUser)->delete(route('task_statuses.destroy', $this->taskStatus));
         $response->assertForbidden();
     }
 
-    public function test_destroy(): void
+    public function testDestroy(): void
     {
         $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $this->taskStatus));
 

@@ -8,6 +8,9 @@ use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
@@ -24,11 +27,24 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::orderBy('id', 'asc')->paginate();
+        $users = User::pluck('name', 'id');
+        $statuses = TaskStatus::pluck('name', 'id');
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedFilters(
+                [
+                    AllowedFilter::exact('status_id'),
+                    AllowedFilter::exact('created_by_id'),
+                    AllowedFilter::exact('assigned_to_id')
+                ]
+            )
+            ->orderBy('id', 'asc')
+            ->paginate();
 
-        return view('tasks.index', compact('tasks'));
+        $filter = $request->filter ?? null;
+
+        return view('tasks.index', compact('tasks', 'statuses', 'users', 'filter'));
     }
 
     /**
@@ -98,7 +114,7 @@ class TaskController extends Controller
         $task->fill($data)->save();
 
         if (isset($data['labels'])) { //проверяем выбраны ли в форме лэйблы?
-            if ($data['labels'][0] === null && count($data['labels']) > 1) { // если выбрана первая опция('') и выбраны ещё другие эл-ты
+            if ($data['labels'][0] === null && count($data['labels']) > 1) { // если выбрана первая опция('') и другие
                 unset($data['labels'][0]); // убираем первую опцию(null)
                 $task->labels()->sync($data['labels']); // синхронизируем
             } elseif ($data['labels'][0] === null) { // если выбрана только первая опция('')

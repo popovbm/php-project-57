@@ -7,6 +7,7 @@ return [
         'edit' => 'Изменить',
         'edit_header' => 'Изменение статуса',
         'name' => 'Имя',
+        'index_placeholder' => 'Статус',
     ],
     'task' => [
         'header' => 'Задачи',
@@ -23,6 +24,8 @@ return [
         'status' => 'Статус',
         'assigned' => 'Исполнитель',
         'labels' => 'Метки',
+        'index_creator_placeholder' => 'Автор',
+        'index_assigned_placeholder' => 'Исполнитель',
     ],
     'label' => [
         'header' => 'Метки',
@@ -48,7 +51,7 @@ return [
     'button' => [
         'create' => 'Создать',
         'update' => 'Обновить',
-        'create_apply' => 'Применить',
+        'filter_apply' => 'Применить',
         'welcome' => 'Нажми меня',
         'back' => 'Назад',
         'delete' => 'Удалить',

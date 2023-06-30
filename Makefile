@@ -1,7 +1,34 @@
-start: drop-migrate-seed serve
+setup: env-prepare sqlite-prepare install key db-prepare ide-helper
+	npm run build
 
-install-deps:
+env-prepare:
+	cp -n .env.example .env || true
+
+sqlite-prepare:
+	touch database/database.sqlite
+
+install: install-app install-frontend
+
+install-app:
 	composer install
+
+install-frontend:
+	npm ci
+
+key:
+	php artisan key:generate
+
+db-prepare:
+	php artisan migrate:refresh --seed --force
+
+ide-helper:
+	php artisan ide-helper:eloquent
+	php artisan ide-helper:gen
+	php artisan ide-helper:meta
+	php artisan ide-helper:mod -n
+
+start:
+	php artisan serve --host=0.0.0.0 --port=$(PORT)
 
 validate:
 	composer validate
@@ -17,12 +44,3 @@ test:
 
 test-coverage:
 	php artisan test --coverage-clover build/logs/clover.xml
-
-drop-migrate-seed:
-	php artisan migrate:refresh --seed --force
-
-serve:
-	php artisan serve --host=0.0.0.0 --port=$(PORT)
-
-seed:
-	php artisan db:seed --force

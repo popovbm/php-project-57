@@ -39,42 +39,42 @@ class TaskTest extends TestCase
         ]);
     }
 
-    public function test_index(): void
+    public function testIndex(): void
     {
         $response = $this->get(route('tasks.index'));
 
         $response->assertOk();
     }
 
-    public function test_show(): void
+    public function testShow(): void
     {
         $response = $this->get(route('tasks.show', $this->task));
 
         $response->assertOk();
     }
 
-    public function test_create_non_auth(): void
+    public function testCreatNonAuth(): void
     {
         $response = $this->get(route('tasks.create'));
 
         $response->assertForbidden();
     }
 
-    public function test_create(): void
+    public function testCreate(): void
     {
         $response = $this->actingAs($this->user)->get(route('tasks.create'));
 
         $response->assertOk();
     }
 
-    public function test_store_non_auth(): void
+    public function testStoreNonAuth(): void
     {
         $response = $this->post(route('tasks.store'), $this->taskData);
 
         $response->assertForbidden();
     }
 
-    public function test_store(): void
+    public function testStore(): void
     {
         $response = $this->actingAs($this->user)->post(route('tasks.store'), $this->taskData);
 
@@ -82,28 +82,28 @@ class TaskTest extends TestCase
         $response->assertRedirect(route('tasks.index'));
     }
 
-    public function test_edit_non_auth(): void
+    public function testEditNonAuth(): void
     {
         $response = $this->get(route('tasks.edit', $this->task));
 
         $response->assertForbidden();
     }
 
-    public function test_edit(): void
+    public function testEdit(): void
     {
         $response = $this->actingAs($this->user)->get(route('tasks.edit', $this->task));
 
         $response->assertOk();
     }
 
-    public function test_update_non_auth(): void
+    public function testUpdateNonAuth(): void
     {
         $response = $this->patch(route('tasks.update', $this->task), $this->taskData);
 
         $response->assertForbidden();
     }
 
-    public function test_update(): void
+    public function testUpdate(): void
     {
         $response = $this->actingAs($this->user)
             ->patch(route('tasks.update', $this->task), $this->taskData);
@@ -112,21 +112,21 @@ class TaskTest extends TestCase
         $response->assertRedirect(route('tasks.show', $this->task));
     }
 
-    public function test_destroy_non_auth(): void
+    public function testDestroyNonAuth(): void
     {
         $response = $this->delete(route('tasks.destroy', $this->task));
 
         $response->assertForbidden();
     }
 
-    public function test_destroy_by_wrong_user(): void
+    public function testDestroyByWrongUser(): void
     {
         $response = $this->actingAs($this->wrongUser)->delete(route('tasks.destroy', $this->task));
 
         $response->assertForbidden();
     }
 
-    public function test_destroy(): void
+    public function testDestroy(): void
     {
         $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $this->task));
 

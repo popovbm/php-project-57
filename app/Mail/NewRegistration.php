@@ -13,13 +13,14 @@ use Illuminate\Queue\SerializesModels;
 
 class NewRegistration extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
      */
     public function __construct(
-        public User $user,
+    public User $user,
         public $password
     ) {
     }
