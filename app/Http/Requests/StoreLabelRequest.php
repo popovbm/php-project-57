@@ -35,8 +35,8 @@ class StoreLabelRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.unique' => __('layout.form.taskStatus_unique'),
-            'name.required' => __('layout.form.name_required'),
+            'name.unique' => __('layout.form.label_unique'),
+            'name.required' => __('layout.form.required'),
             'name.max' => __('layout.form.name_max'),
             'description.max' => __('layout.form.description_max'),
         ];

@@ -6,10 +6,6 @@
         <div class="grid col-span-full">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layout.task_status.edit_header') }}</h1>
 
-            @if ($errors->any())
-            @include('components.show-form-errors')
-            @endif
-
             {{ Form::model($taskStatus, ['route' => ['task_statuses.update', $taskStatus], 'method' => 'PATCH', 'class' => 'w-50']) }}
             <div class="flex flex-col">
                 <div>
@@ -18,11 +14,17 @@
                 <div class="mt-2 text-black">
                     {{ Form::text('name') }}
                 </div>
+                @if ($errors->first('name'))
+                <div class="text-red-500">
+                    {{ $errors->first('name') }}
+                </div>
+                @endif
                 <div class="mt-2">
                     {{ Form::submit(__('layout.button.update'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
                     <a class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' href="{{ route('task_statuses.index')}}">{{ __('layout.button.back') }}</a>
                 </div>
                 {{ Form::close() }}
+
             </div>
         </div>
     </div>

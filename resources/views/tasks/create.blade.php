@@ -6,10 +6,6 @@
         <div class="grid col-span-full">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layout.task.create') }}</h1>
 
-            @if ($errors->any())
-            @include('components.show-form-errors')
-            @endif
-
             {{ Form::model($task, ['url' => route('tasks.store'), 'class' => 'w-50']) }}
             <div class="flex flex-col">
                 <div>
@@ -18,18 +14,33 @@
                 <div class="mt-2">
                     {{ Form::text('name') }}
                 </div>
+                @if ($errors->first('name'))
+                <div class="text-red-500">
+                    {{ $errors->first('name') }}
+                </div>
+                @endif
                 <div class="mt-2">
                     {{ Form::label('description', __('layout.task.description'), ['class' => 'text-black dark:text-white']) }}
                 </div>
                 <div>
                     {{ Form::textarea('description') }}
                 </div>
+                @if ($errors->first('description'))
+                <div class="text-red-500">
+                    {{ $errors->first('description') }}
+                </div>
+                @endif
                 <div class="mt-2">
                     {{ Form::label('status_id', __('layout.task.status'), ['class' => 'text-black dark:text-white']) }}
                 </div>
                 <div>
                     {{ Form::select('status_id', $statuses, null, ['class' => 'form-control rounded border-gray-300 w-1/3', 'placeholder' => '----------']) }}
                 </div>
+                @if ($errors->first('status_id'))
+                <div class="text-red-500">
+                    {{ $errors->first('status_id') }}
+                </div>
+                @endif
                 <div class="mt-2">
                     {{ Form::label('assigned_to_id', __('layout.task.assigned'), ['class' => 'text-black dark:text-white']) }}
                 </div>

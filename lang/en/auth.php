@@ -21,6 +21,6 @@ return [
     'required_password' => 'The field "Password" cannot be empty',
     'password_min' => 'Password must not be shorter than 8 characters',
     'password_conf' => 'Password and confirmation do not match',
-    'email_unique' => 'This email is already registered'
+    'email_unique' => 'The email has already been taken.'
 
 ];

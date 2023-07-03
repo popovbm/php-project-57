@@ -35,7 +35,7 @@ class StoreTaskStatusRequest extends FormRequest
     {
         return [
             'name.unique' => __('layout.form.taskStatus_unique'),
-            'name.required' => __('layout.form.name_required'),
+            'name.required' => __('layout.form.required'),
             'name.max' => __('layout.form.name_max'),
         ];
     }

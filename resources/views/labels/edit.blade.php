@@ -6,10 +6,6 @@
         <div class="grid col-span-full">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layout.label.edit_header') }}</h1>
 
-            @if ($errors->any())
-            @include('components.show-form-errors')
-            @endif
-
             {{ Form::model($label, ['route' => ['labels.update', $label], 'method' => 'PATCH', 'class' => 'w-50']) }}
             <div class="flex flex-col">
                 <div>
@@ -18,12 +14,22 @@
                 <div class="mt-2 text-black">
                     {{ Form::text('name') }}
                 </div>
+                @if ($errors->first('name'))
+                <div class="text-red-500">
+                    {{ $errors->first('name') }}
+                </div>
+                @endif
                 <div>
                     {{ Form::label('description', __('layout.label.description')) }}
                 </div>
                 <div class="mt-2 text-black">
                     {{ Form::textarea('description') }}
                 </div>
+                @if ($errors->first('description'))
+                <div class="text-red-500">
+                    {{ $errors->first('description') }}
+                </div>
+                @endif
                 <div class="mt-2">
                     {{ Form::submit(__('layout.button.update'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
                     <a class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' href="{{ route('labels.index')}}">{{ __('layout.button.back') }}</a>
