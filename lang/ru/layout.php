@@ -84,7 +84,7 @@ return [
         'name' => 'Имя',
         'email' => 'Email',
         'password' => 'Пароль',
-        'password_confirm' => 'Подтверждение пароля',
+        'password_confirm' => 'Подтверждение',
         'already_register' => 'Уже зарегистрированы?',
         'reg_button' => 'Зарегистрировать',
         'remember' => 'Запомнить меня',

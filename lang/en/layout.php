@@ -89,7 +89,7 @@ return [
         'reg_button' => 'Register',
         'remember' => 'Remember me',
         'forgot' => 'Forgot your password?',
-        'enter' => 'Enter',
+        'enter' => 'Login',
         'forgot_text' => 'Forgot your password? No problem. Just give us your email address and we will send you a password reset link that will allow you to choose a new one.',
         'reset_button' => 'Reset password',
         'password_change' => 'Change password',
