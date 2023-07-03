@@ -36,7 +36,7 @@ validate:
 	composer validate
 
 lint:
-	composer exec phpcs -- --standard=PSR12 routes tests
+	composer exec phpcs -- --standard=PSR12 app routes tests
 
 lint-fix:
 	composer exec phpcbf -- --standard=PSR12 app routes tests

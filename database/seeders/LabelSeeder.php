@@ -26,5 +26,4 @@ class LabelSeeder extends Seeder
             )
             ->create();
     }
-
 }
