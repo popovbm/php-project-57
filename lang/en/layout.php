@@ -64,7 +64,7 @@ return [
         'labels' => 'Labels',
         'login' => 'Sign in',
         'registration' => 'Sign up',
-        'logout' => 'Logout',
+        'logout' => 'Exit',
     ],
     'pagination' => [
         'show' => 'Shown from ',
