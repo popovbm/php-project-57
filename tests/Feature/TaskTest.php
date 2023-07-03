@@ -16,7 +16,6 @@ class TaskTest extends TestCase
 
     private User $user;
     private User $wrongUser;
-    private TaskStatus $taskStatus;
     private Task $task;
     private array $taskData;
 
@@ -25,7 +24,6 @@ class TaskTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->wrongUser = User::factory()->create();
-        $this->taskStatus = TaskStatus::factory()->create();
         $this->task = Task::factory([
             'created_by_id' => $this->user->id,
         ])->create();

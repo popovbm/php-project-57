@@ -21,7 +21,7 @@ class NewRegistration extends Mailable
      */
     public function __construct(
         public User $user,
-        public $password
+        public string $password
     ) {
     }
 

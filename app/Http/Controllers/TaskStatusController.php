@@ -82,7 +82,7 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        if (!empty($taskStatus->tasks()->first())) {
+        if ($taskStatus->tasks()->exists()) {
             session()->flash('error', __('layout.task_status.flash_delete_fail'));
             return back();
         }

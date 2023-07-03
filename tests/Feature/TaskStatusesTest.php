@@ -15,7 +15,6 @@ class TaskStatusesTest extends TestCase
     use DatabaseTransactions;
 
     private User $user;
-    private User $wrongUser;
     private TaskStatus $taskStatus;
     private array $taskStatusData;
 
@@ -23,7 +22,6 @@ class TaskStatusesTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
-        $this->wrongUser = User::factory()->create();
         $this->taskStatus = TaskStatus::factory()->create();
         $this->taskStatusData = TaskStatus::factory()->make()->only([
             'name',

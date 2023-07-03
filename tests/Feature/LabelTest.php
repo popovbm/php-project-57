@@ -15,7 +15,6 @@ class LabelTest extends TestCase
     use DatabaseTransactions;
 
     private User $user;
-    private User $wrongUser;
     private Label $label;
     private array $labelData;
 
@@ -23,7 +22,6 @@ class LabelTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
-        $this->wrongUser = User::factory()->create();
         $this->label = Label::factory()->create();
         $this->labelData = Label::factory()
             ->make()

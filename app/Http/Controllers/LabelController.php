@@ -82,7 +82,7 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        if (!empty($label->tasks()->first())) {
+        if ($label->tasks()->exists()) {
             session()->flash('error', __('layout.label.flash_delete_fail'));
             return back();
         }
