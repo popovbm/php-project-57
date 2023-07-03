@@ -45,9 +45,10 @@ class LabelController extends Controller
     {
         $data = $request->validated();
 
-        $request->user()->labels()->create($data);
+        $label = new Label($data);
+        $label->save();
 
-        session()->flash('message', 'New label created successfully');
+        session()->flash('success', 'New label created successfully');
 
         return redirect()
             ->route('labels.index');
@@ -70,7 +71,7 @@ class LabelController extends Controller
 
         $label->fill($data)->save();
 
-        session()->flash('message', 'Label edited successfully');
+        session()->flash('success', 'Label edited successfully');
 
         return redirect()
             ->route('labels.index');
@@ -81,10 +82,13 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        $labelName = $label->name;
+        if (!empty($label->tasks()->first())) {
+            session()->flash('error', "Не удалось удалить метку");
+            return back();
+        }
         $label->delete();
 
-        session()->flash('message', "Label \"{$labelName}\" deleted successfully");
+        session()->flash('success', "Label deleted successfully");
 
         return redirect()
             ->route('labels.index');

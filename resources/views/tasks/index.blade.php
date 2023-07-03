@@ -26,8 +26,6 @@
                     </div>
             </div>
 
-
-
             <table class="mt-4 text-black dark:text-white border-collapse border border-slate-500">
                 <thead>
                     <tr>

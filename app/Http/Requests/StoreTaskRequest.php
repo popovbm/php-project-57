@@ -23,10 +23,26 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'name' => ['required', 'unique:tasks', 'max:255'],
-            'description' => 'max:255',
+            'description' => 'max:500',
             'status_id' => 'required',
             'assigned_to_id' => ['nullable', 'exists:users,id'],
             'labels' => ['nullable', 'array'],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => __('layout.form.task_unique'),
+            'name.required' => __('layout.form.task_required'),
+            'status_id.required' => __('layout.form.task_status_required'),
+            'name.max' => __('layout.form.name_max'),
+            'description.max' => __('layout.form.description_max'),
         ];
     }
 }

@@ -1,4 +1,4 @@
-<p style="color:red">{{ __('layout.oops') }}</p>
+<p style="color:red">{{ __('layout.form.oops') }}</p>
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)

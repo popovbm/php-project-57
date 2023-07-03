@@ -20,9 +20,4 @@ class Label extends Model
     {
         return $this->BelongsToMany(Task::class);
     }
-
-    public function creator(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'created_by_id');
-    }
 }

@@ -18,11 +18,9 @@ class LabelFactory extends Factory
      */
     public function definition(): array
     {
-        // $label = Label::all()->random();
         return [
             'name' => fake()->unique()->name(),
             'description' => fake()->text(100),
-            'created_by_id' => User::all()->random(),
         ];
     }
 }

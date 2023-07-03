@@ -24,9 +24,7 @@ class TaskStatusesTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->wrongUser = User::factory()->create();
-        $this->taskStatus = TaskStatus::factory([
-            'creator_id' => $this->user->id,
-        ])->create();
+        $this->taskStatus = TaskStatus::factory()->create();
         $this->taskStatusData = TaskStatus::factory()->make()->only([
             'name',
         ]);
@@ -102,12 +100,6 @@ class TaskStatusesTest extends TestCase
     {
         $response = $this->delete(route('task_statuses.destroy', $this->taskStatus));
 
-        $response->assertForbidden();
-    }
-
-    public function testDestroyByWrongUser(): void
-    {
-        $response = $this->actingAs($this->wrongUser)->delete(route('task_statuses.destroy', $this->taskStatus));
         $response->assertForbidden();
     }
 

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('task_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
         });
     }

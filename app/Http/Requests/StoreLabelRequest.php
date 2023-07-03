@@ -22,8 +22,23 @@ class StoreLabelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:50', 'unique:labels'],
-            'description' => ['nullable', 'max:255'],
+            'name' => ['required', 'max:255', 'unique:labels'],
+            'description' => ['nullable', 'max:500'],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => __('layout.form.taskStatus_unique'),
+            'name.required' => __('layout.form.name_required'),
+            'name.max' => __('layout.form.name_max'),
+            'description.max' => __('layout.form.description_max'),
         ];
     }
 }

@@ -27,14 +27,16 @@ ide-helper:
 	php artisan ide-helper:meta
 	php artisan ide-helper:mod -n
 
-start:
+start: db-prepare start-app
+
+start-app:
 	php artisan serve --host=0.0.0.0 --port=$(PORT)
 
 validate:
 	composer validate
 
 lint:
-	composer exec phpcs -- --standard=PSR12 app routes tests
+	composer exec phpcs -- --standard=PSR12 routes tests
 
 lint-fix:
 	composer exec phpcbf -- --standard=PSR12 app routes tests

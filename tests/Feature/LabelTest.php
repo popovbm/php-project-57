@@ -24,13 +24,8 @@ class LabelTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->wrongUser = User::factory()->create();
-        $this->label = Label::factory([
-            'created_by_id' => $this->user
-        ])->create();
-        $this->labelData = Label::factory([
-            'name' => fake()->unique()->name(),
-            'description' => fake()->text(100),
-        ])
+        $this->label = Label::factory()->create();
+        $this->labelData = Label::factory()
             ->make()
             ->only([
                 'name',
@@ -107,13 +102,6 @@ class LabelTest extends TestCase
     public function testDestroyNonAuth(): void
     {
         $response = $this->delete(route('labels.destroy', $this->label));
-
-        $response->assertForbidden();
-    }
-
-    public function testDestroyByWrongUser(): void
-    {
-        $response = $this->actingAs($this->wrongUser)->delete(route('labels.destroy', $this->label));
 
         $response->assertForbidden();
     }

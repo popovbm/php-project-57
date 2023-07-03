@@ -40,10 +40,10 @@ class LoginRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'password.required' => 'Это обязательное поле',
-            'password.min' => 'Пароль должен иметь длину не менее 8 символов',
-            'email.max' => 'Email должен иметь длину не более 255 символов',
-            'email.required' => 'Это обязательное поле',
+            'password.required' => __('layout.login.password_required'),
+            'password.min' => __('layout.login.password_min'),
+            'email.max' => __('layout.login.email_max'),
+            'email.required' => __('layout.login.email_required'),
         ];
     }
 

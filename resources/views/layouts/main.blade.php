@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_token" />
+    <title>{{ __('layout.title') }}</title>
+    <meta name = "description" content = "{{ __('layout.description') }}" />
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -18,11 +20,17 @@
 </head>
 
 <body>
-    @if (session()->has('message'))
-    @include('components.flash-messages')
-    @endif
     <div id="app">
-        @include('components.header')
-        @yield('content')
+    @include('components.header')
+    @if (session()->has('success'))
+    <div class="bg-teal-100 border border-teal-400 text-teal-900 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline">{{ session('success') }}</span>
+    </div>
+    @elseif (session()->has('error'))
+    <div class="bg-red-100 border border-red-400 text-red-900 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline">{{ session('error') }}</span>
+    </div>
+    @endif
+    @yield('content')
     </div>
 </body>

@@ -79,7 +79,7 @@ class TaskController extends Controller
             }
         }
 
-        session()->flash('message', 'New task created successfully');
+        session()->flash('success', 'New task created successfully');
 
         return redirect()
             ->route('tasks.index');
@@ -126,10 +126,10 @@ class TaskController extends Controller
             $task->labels()->detach(); // удаляем все лэйблы у таска
         }
 
-        session()->flash('message', 'Task edited successfully');
+        session()->flash('success', 'Task edited successfully');
 
         return redirect()
-            ->route('tasks.show', $task);
+            ->route('tasks.index');
     }
 
     /**
@@ -137,11 +137,10 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $taskName = $task->name;
         $task->labels()->detach();
         $task->delete();
 
-        session()->flash('message', "Task \"{$taskName}\" deleted successfully");
+        session()->flash('success', "Task deleted successfully");
 
         return redirect()
             ->route('tasks.index');

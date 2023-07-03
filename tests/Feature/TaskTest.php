@@ -25,9 +25,7 @@ class TaskTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create();
         $this->wrongUser = User::factory()->create();
-        $this->taskStatus = TaskStatus::factory([
-            'creator_id' => $this->user->id,
-        ])->create();
+        $this->taskStatus = TaskStatus::factory()->create();
         $this->task = Task::factory([
             'created_by_id' => $this->user->id,
         ])->create();
@@ -109,7 +107,7 @@ class TaskTest extends TestCase
             ->patch(route('tasks.update', $this->task), $this->taskData);
 
         $response->assertSessionHasNoErrors();
-        $response->assertRedirect(route('tasks.show', $this->task));
+        $response->assertRedirect(route('tasks.index'));
     }
 
     public function testDestroyNonAuth(): void

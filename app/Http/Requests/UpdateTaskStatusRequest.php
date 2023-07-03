@@ -22,11 +22,7 @@ class UpdateTaskStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                "required",
-                "string",
-                "unique:task_statuses,name,{$this->task_status->id}"
-            ]
+            'name' => ["required","string","unique:task_statuses,name,{$this->task_status->id}", 'max:255']
 
         ];
     }
@@ -39,8 +35,9 @@ class UpdateTaskStatusRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.unique' => __('auth.unique_error'),
-            'name.required' => __('auth.required_error'),
+            'name.unique' => __('layout.form.taskStatus_unique'),
+            'name.required' => __('layout.form.name_required'),
+            'name.max' => __('layout.form.name_max'),
         ];
     }
 }

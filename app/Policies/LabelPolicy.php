@@ -38,9 +38,7 @@ class LabelPolicy
      */
     public function delete(User $user, Label $label): bool
     {
-        return Auth::check() &&
-            empty($label->tasks()->first()) &&
-            $label->created_by_id === $user->id;
+        return Auth::check();
     }
 
     public function seeActions(User $user): bool

@@ -15,11 +15,6 @@ class TaskStatus extends Model
         'name',
     ];
 
-    public function creator(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class, 'status_id');
