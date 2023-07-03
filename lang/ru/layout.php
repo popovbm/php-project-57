@@ -8,6 +8,10 @@ return [
         'edit_header' => 'Изменение статуса',
         'name' => 'Имя',
         'index_placeholder' => 'Статус',
+        'flash_create_success' => 'Статус успешно создан',
+        'flash_update_success' => 'Статус успешно изменён',
+        'flash_delete_fail' => 'Не удалось удалить статус',
+        'flash_delete_success' => 'Статус успешно удалён',
     ],
     'task' => [
         'header' => 'Задачи',
@@ -26,6 +30,9 @@ return [
         'labels' => 'Метки',
         'index_creator_placeholder' => 'Автор',
         'index_assigned_placeholder' => 'Исполнитель',
+        'flash_create_success' => 'Задача успешно создана',
+        'flash_update_success' => 'Задача успешно изменена',
+        'flash_delete_success' => 'Задача успешно удалена',
     ],
     'label' => [
         'header' => 'Метки',
@@ -34,6 +41,10 @@ return [
         'create_header' => 'Создать метку',
         'name' => 'Имя',
         'description' => 'Описание',
+        'flash_create_success' => 'Метка успешно создана',
+        'flash_update_success' => 'Метка успешно изменена',
+        'flash_delete_fail' => 'Не удалось удалить метку',
+        'flash_delete_success' => 'Метка успешно удалена',
     ],
     'table' => [
         'id' => 'ID',
