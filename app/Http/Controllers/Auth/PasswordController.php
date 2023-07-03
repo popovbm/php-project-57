@@ -34,7 +34,7 @@ class PasswordController extends Controller
 
         session()->flash('message', 'Password successfully changed');
 
-        Mail::to($request->user())->send(new NewPassword($validated['password']));
+        // Mail::to($request->user())->send(new NewPassword($validated['password']));
 
         return back()->with('status', 'password-updated');
     }

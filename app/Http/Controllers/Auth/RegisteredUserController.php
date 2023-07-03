@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        Mail::to($user)->send(new NewRegistration($user, $request->password));
+        // Mail::to($user)->send(new NewRegistration($user, $request->password));
 
         return redirect(RouteServiceProvider::HOME);
     }
