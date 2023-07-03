@@ -104,6 +104,6 @@ return [
     'title' => 'Task manager',
     'name' => 'Task manager',
     'description' => 'Task manager description',
-    'home_content' => 'Hello from Ivan!',
+    'home_content' => 'Hello from Hexlet!',
     'home_content_2' => 'This is a simple task manager in Laravel.',
 ];
