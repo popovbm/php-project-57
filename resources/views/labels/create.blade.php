@@ -22,7 +22,7 @@
                     {{ Form::label('description', __('layout.label.description')) }}
                 </div>
                 <div class="mt-2 text-black">
-                    {{ Form::text('description') }}
+                    {{ Form::textarea('description') }}
                 </div>
                 <div class="mt-2">
                     {{ Form::submit(__('layout.button.create'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
