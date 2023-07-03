@@ -18,7 +18,6 @@
                 </div>
                 <div class="mt-2">
                     {{ Form::submit(__('layout.button.create'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
-                    <a class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' href="{{ route('task_statuses.index')}}">{{ __('layout.button.back') }}</a>
                 </div>
                 {{ Form::close() }}
             </div>
