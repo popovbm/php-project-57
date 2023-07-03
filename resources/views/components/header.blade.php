@@ -31,10 +31,10 @@
         @if (Route::has('login'))
         <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
             @auth
-            <form action="{{ route('logout') }}" method="post">
-            @csrf
-                <button type="submit" class = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2'>{{ __('layout.nav.logout') }}</button>
-            </form>
+
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2" href="{{ route('logout') }}" data-method="post" rel="nofollow">{{ __('layout.nav.logout') }}</a>
+
+
             @else
             <a href="{{ route('login') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('layout.nav.login') }}</a>
             @if (Route::has('register'))
