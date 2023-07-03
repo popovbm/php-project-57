@@ -62,7 +62,7 @@ return [
         'task_statuses' => 'Statuses',
         'tasks' => 'Tasks',
         'labels' => 'Labels',
-        'login' => 'Sign in',
+        'login' => 'login',
         'registration' => 'Sign up',
         'logout' => 'Exit',
     ],
