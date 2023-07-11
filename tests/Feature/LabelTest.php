@@ -16,14 +16,21 @@ class LabelTest extends TestCase
 
     private User $user;
     private Label $label;
-    private array $labelData;
+    private array $newLabelData;
+    private array $updateLabelData;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
         $this->label = Label::factory()->create();
-        $this->labelData = Label::factory()
+        $this->newLabelData = Label::factory()
+            ->make()
+            ->only([
+                'name',
+                'description',
+            ]);
+        $this->updateLabelData = Label::factory()
             ->make()
             ->only([
                 'name',
@@ -54,14 +61,16 @@ class LabelTest extends TestCase
 
     public function testStoreNonAuth(): void
     {
-        $response = $this->post(route('labels.store'), $this->labelData);
+        $response = $this->post(route('labels.store'), $this->newLabelData);
 
         $response->assertForbidden();
     }
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->user)->post(route('labels.store'), $this->labelData);
+        $response = $this->actingAs($this->user)->post(route('labels.store'), $this->newLabelData);
+
+        $this->assertDatabaseHas('labels', $this->newLabelData);
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
@@ -83,7 +92,7 @@ class LabelTest extends TestCase
 
     public function testUpdateNonAuth(): void
     {
-        $response = $this->patch(route('labels.update', $this->label), $this->labelData);
+        $response = $this->patch(route('labels.update', $this->label), $this->updateLabelData);
 
         $response->assertForbidden();
     }
@@ -91,7 +100,9 @@ class LabelTest extends TestCase
     public function testUpdate(): void
     {
         $response = $this->actingAs($this->user)
-            ->patch(route('labels.update', $this->label), $this->labelData);
+            ->patch(route('labels.update', $this->label), $this->updateLabelData);
+
+        $this->assertDatabaseHas('labels', $this->updateLabelData);
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
@@ -108,9 +119,9 @@ class LabelTest extends TestCase
     {
         $response = $this->actingAs($this->user)->delete(route('labels.destroy', $this->label));
 
-        $this->assertModelMissing($this->label);
-
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
+
+        $this->assertDatabaseMissing('labels', $this->label->only('id'));
     }
 }

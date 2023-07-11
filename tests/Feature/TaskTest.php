@@ -17,7 +17,8 @@ class TaskTest extends TestCase
     private User $user;
     private User $wrongUser;
     private Task $task;
-    private array $taskData;
+    private array $newTaskData;
+    private array $updateTaskData;
 
     protected function setUp(): void
     {
@@ -27,7 +28,13 @@ class TaskTest extends TestCase
         $this->task = Task::factory([
             'created_by_id' => $this->user->id,
         ])->create();
-        $this->taskData = Task::factory()->make()->only([
+        $this->newTaskData = Task::factory()->make()->only([
+            'name',
+            'description',
+            'status_id',
+            'assigned_to_id',
+        ]);
+        $this->updateTaskData = Task::factory()->make()->only([
             'name',
             'description',
             'status_id',
@@ -65,14 +72,16 @@ class TaskTest extends TestCase
 
     public function testStoreNonAuth(): void
     {
-        $response = $this->post(route('tasks.store'), $this->taskData);
+        $response = $this->post(route('tasks.store'), $this->newTaskData);
 
         $response->assertForbidden();
     }
 
     public function testStore(): void
     {
-        $response = $this->actingAs($this->user)->post(route('tasks.store'), $this->taskData);
+        $response = $this->actingAs($this->user)->post(route('tasks.store'), $this->newTaskData);
+
+        $this->assertDatabaseHas('tasks', $this->newTaskData);
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('tasks.index'));
@@ -94,7 +103,7 @@ class TaskTest extends TestCase
 
     public function testUpdateNonAuth(): void
     {
-        $response = $this->patch(route('tasks.update', $this->task), $this->taskData);
+        $response = $this->patch(route('tasks.update', $this->task), $this->updateTaskData);
 
         $response->assertForbidden();
     }
@@ -102,7 +111,9 @@ class TaskTest extends TestCase
     public function testUpdate(): void
     {
         $response = $this->actingAs($this->user)
-            ->patch(route('tasks.update', $this->task), $this->taskData);
+            ->patch(route('tasks.update', $this->task), $this->updateTaskData);
+
+        $this->assertDatabaseHas('tasks', $this->updateTaskData);
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('tasks.index'));
@@ -128,5 +139,7 @@ class TaskTest extends TestCase
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('tasks.index'));
+
+        $this->assertDatabaseMissing('tasks', $this->task->only('id'));
     }
 }
