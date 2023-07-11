@@ -23,7 +23,7 @@ class UpdateTaskRequest extends FormRequest
     {
         return [
             'name' => ['required', "unique:tasks,name,{$this->task->id}", 'max:255'],
-            'description' => 'max:255',
+            'description' => ['nullable', 'max:500'],
             'status_id' => 'required',
             'assigned_to_id' => ['nullable', 'exists:users,id'],
             'labels' => ['nullable', 'array'],
