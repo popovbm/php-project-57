@@ -5,26 +5,33 @@
     <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
         <div class="grid col-span-full">
             <h1 class="mb-5 text-black dark:text-white text-5xl">{{ __('layout.task.header') }}</h1>
-            <div>
-                {{Form::open(['route' => 'tasks.index', 'method' => 'GET'])}}
-                <div class="flex">
+            <div class="w-full flex items-center">
+                <div>
+                    {{Form::open(['route' => 'tasks.index', 'method' => 'GET'])}}
+                    <div class="flex">
                         <div>
-                            {{Form::select('filter[status_id]', $statuses, $filter['status_id'] ?? null, ['placeholder' => __('layout.task_status.index_placeholder')])}} </div>
-                        <div >
-                            {{Form::select('filter[created_by_id]', $users, $filter['created_by_id'] ?? null, ['placeholder' => __('layout.task.index_creator_placeholder')])}}</div>
+                            {{Form::select('filter[status_id]', $statuses, $filter['status_id'] ?? null, ['placeholder' => __('layout.task_status.index_placeholder')])}}
+                        </div>
+                        <div>
+                            {{Form::select('filter[created_by_id]', $users, $filter['created_by_id'] ?? null, ['placeholder' => __('layout.task.index_creator_placeholder')])}}
+                        </div>
                         <div>
                             {{Form::select('filter[assigned_to_id]', $users, $filter['assigned_to_id'] ?? null, ['placeholder' => __('layout.task.index_assigned_placeholder')])}}
                         </div>
                         <div>
                             {{Form::submit(__('layout.button.filter_apply'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2'])}}
                         </div>
-                        @can('create', App\Models\Task::class)
-                        <div class="ml-auto flex">
-                            <a class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' href="{{ route('tasks.create') }}">{{ __('layout.task.create') }}</a>
-                        </div>
-                        @endcan
                     </div>
+                    {{ Form::close() }}
+                </div>
+
+                <div class="ml-auto">
+                    @can('create', App\Models\Task::class)
+                    <a class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2' href="{{ route('tasks.create') }}">{{ __('layout.task.create') }}</a>
+                    @endcan
+                </div>
             </div>
+
 
             <table class="mt-4 text-black dark:text-white border-collapse border border-slate-500">
                 <thead>

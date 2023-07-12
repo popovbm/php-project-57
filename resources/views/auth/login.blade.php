@@ -3,7 +3,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <h2 class="text-center mb-5 text-3xl"><a href="/">{{ __('layout.name') }}</a></h2>
+    <h2 class="text-center mb-5 text-3xl dark:text-white"><a href="/">{{ __('layout.name') }}</a></h2>
     @if ($errors->any())
     @include('components.show-form-errors')
     @endif
@@ -13,14 +13,14 @@
 
         <!-- Email Address -->
         <div>
-            <x-input-label for="email" :value="__('layout.profile.email')" />
+            <x-input-label for="email" :value="__('layout.profile.email')" class="dark:text-white" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
 
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('layout.profile.password')" />
+            <x-input-label for="password" :value="__('layout.profile.password')" class="dark:text-white" />
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
         </div>
 
@@ -28,13 +28,13 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('layout.profile.remember') }}</span>
+                <span class="ml-2 text-sm text-gray-600 dark:text-white">{{ __('layout.profile.remember') }}</span>
             </label>
         </div>
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white dark:hover:text-slate-400" href="{{ route('password.request') }}">
                 {{ __('layout.profile.forgot') }}
             </a>
             @endif
