@@ -6,8 +6,7 @@
                 <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">{{ __('layout.name') }}</span>
             </a>
 
-
-            <div class="items-center justify-between">
+            <div class="flex items-center justify-between">
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                     <li>
                         <a href="{{ route('tasks.index') }}" class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0">
@@ -28,6 +27,9 @@
             </div>
 
             <div class="flex items-center">
+                <div class="mr-5">
+                    {{ language()->flags() }}
+                </div>
                 @if (Route::has('login'))
                 @auth
                 <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('logout') }}" data-method="post" rel="nofollow">{{ __('layout.nav.logout') }}</a>
