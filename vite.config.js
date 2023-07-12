@@ -7,6 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'vendor/akaunting/laravel-language/src/Resources/assets/img/flags/us.png',
+                'vendor/akaunting/laravel-language/src/Resources/assets/img/flags/ru.png'
             ],
             refresh: true,
         }),
