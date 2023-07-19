@@ -114,9 +114,9 @@ class TaskController extends Controller
         $task->fill($data)->save();
 
         if (isset($data['labels'])) {
-            if (in_array(null, $data['labels'], false)) {
+            if (in_array(null, $data['labels'], true)) {
                 if (count($data['labels']) > 1) {
-                    unset($data['labels'][array_search(null, $data['labels'], false)]);
+                    unset($data['labels'][array_search(null, $data['labels'], true)]);
                     $task->labels()->sync($data['labels']);
                 } else {
                     $task->labels()->detach();
