@@ -11,8 +11,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
- * @property array|\Illuminate\Database\Eloquent\Collection $newTaskStatusData
- * @property array|\Illuminate\Database\Eloquent\Collection $updateTaskStatusData
+ * @property array $newTaskStatusData
+ * @property array $updateTaskStatusData
  */
 class TaskStatusesTest extends TestCase
 {

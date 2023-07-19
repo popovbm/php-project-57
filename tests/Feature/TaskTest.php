@@ -11,8 +11,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 /**
- * @property array|\Illuminate\Database\Eloquent\Collection $newTaskData
- * @property array|\Illuminate\Database\Eloquent\Collection $updateTaskData
+ * @property array $newTaskData
+ * @property array $updateTaskData
  */
 class TaskTest extends TestCase
 {

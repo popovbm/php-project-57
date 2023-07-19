@@ -11,8 +11,8 @@ use Illuminate\Support\Testing\Fakes\Fake;
 use Tests\TestCase;
 
 /**
- * @property array|\Illuminate\Database\Eloquent\Collection $newLabelData
- * @property array|\Illuminate\Database\Eloquent\Collection $updateLabelData
+ * @property array $newLabelData
+ * @property array $updateLabelData
  */
 class LabelTest extends TestCase
 {

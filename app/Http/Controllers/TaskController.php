@@ -69,9 +69,9 @@ class TaskController extends Controller
         $task = $request->user()->tasks()->create($data);
 
         if (isset($data['labels'])) {
-            if (in_array(null, $data['labels'], false)) {
+            if (in_array(null, $data['labels'], true)) {
                 if (count($data['labels']) > 1) {
-                    unset($data['labels'][array_search(null, $data['labels'], false)]);
+                    unset($data['labels'][array_search(null, $data['labels'], true)]);
                     $task->labels()->attach($data['labels']);
                 }
             } else {
