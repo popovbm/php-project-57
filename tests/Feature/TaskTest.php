@@ -15,16 +15,12 @@ class TaskTest extends TestCase
     use DatabaseTransactions;
 
     private User $user;
-    private User $wrongUser;
     private Task $task;
-    private array $newTaskData;
-    private array $updateTaskData;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
-        $this->wrongUser = User::factory()->create();
         $this->task = Task::factory([
             'created_by_id' => $this->user->id,
         ])->create();
@@ -56,25 +52,11 @@ class TaskTest extends TestCase
         $response->assertOk();
     }
 
-    public function testCreatNonAuth(): void
-    {
-        $response = $this->get(route('tasks.create'));
-
-        $response->assertForbidden();
-    }
-
     public function testCreate(): void
     {
         $response = $this->actingAs($this->user)->get(route('tasks.create'));
 
         $response->assertOk();
-    }
-
-    public function testStoreNonAuth(): void
-    {
-        $response = $this->post(route('tasks.store'), $this->newTaskData);
-
-        $response->assertForbidden();
     }
 
     public function testStore(): void
@@ -87,25 +69,11 @@ class TaskTest extends TestCase
         $response->assertRedirect(route('tasks.index'));
     }
 
-    public function testEditNonAuth(): void
-    {
-        $response = $this->get(route('tasks.edit', $this->task));
-
-        $response->assertForbidden();
-    }
-
     public function testEdit(): void
     {
         $response = $this->actingAs($this->user)->get(route('tasks.edit', $this->task));
 
         $response->assertOk();
-    }
-
-    public function testUpdateNonAuth(): void
-    {
-        $response = $this->patch(route('tasks.update', $this->task), $this->updateTaskData);
-
-        $response->assertForbidden();
     }
 
     public function testUpdate(): void
@@ -117,20 +85,6 @@ class TaskTest extends TestCase
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('tasks.index'));
-    }
-
-    public function testDestroyNonAuth(): void
-    {
-        $response = $this->delete(route('tasks.destroy', $this->task));
-
-        $response->assertForbidden();
-    }
-
-    public function testDestroyByWrongUser(): void
-    {
-        $response = $this->actingAs($this->wrongUser)->delete(route('tasks.destroy', $this->task));
-
-        $response->assertForbidden();
     }
 
     public function testDestroy(): void

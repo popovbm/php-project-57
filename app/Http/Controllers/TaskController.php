@@ -40,7 +40,7 @@ class TaskController extends Controller
                 ]
             )
             ->orderBy('id', 'asc')
-            ->paginate();
+            ->paginate(15);
 
         $filter = $request->filter ?? null;
 
@@ -68,14 +68,14 @@ class TaskController extends Controller
 
         $task = $request->user()->tasks()->create($data);
 
-        if (isset($data['labels'])) { //проверяем выбраны ли в форме лэйблы?
-            if ($data['labels'][0] === null) { // если выбрана первая опция('')
-                if (count($data['labels']) > 1) { // + выбраны другие лэйблы
-                    unset($data['labels'][0]); // убираем первую опцию(null)
-                    $task->labels()->attach($data['labels']); // добавляем к таску оставшиеся лэйблы
-                } // если кроме первой опции('') больше ничего не выбрано, просто чилим :)
-            } else { // если не выбрана первая опция('')
-                $task->labels()->attach($data['labels']); // добавляем к таску выбранные лэйблы
+        if (isset($data['labels'])) {
+            if (in_array(null, $data['labels'])) {
+                if (count($data['labels']) > 1) {
+                    unset($data['labels'][array_search(null, $data['labels'])]);
+                    $task->labels()->sync($data['labels']);
+                }
+            } else {
+                $task->labels()->sync($data['labels']);
             }
         }
 
@@ -113,17 +113,17 @@ class TaskController extends Controller
 
         $task->fill($data)->save();
 
-        if (isset($data['labels'])) { //проверяем выбраны ли в форме лэйблы?
-            if ($data['labels'][0] === null && count($data['labels']) > 1) { // если выбрана первая опция('') и другие
-                unset($data['labels'][0]); // убираем первую опцию(null)
-                $task->labels()->sync($data['labels']); // синхронизируем
-            } elseif ($data['labels'][0] === null) { // если выбрана только первая опция('')
-                $task->labels()->detach(); // удаляем все лэйблы у таска
-            } else { // иначе просто синхронизируем
+        if (isset($data['labels'])) {
+            if (in_array(null, $data['labels'])) {
+                if (count($data['labels']) > 1) {
+                    unset($data['labels'][array_search(null, $data['labels'])]);
+                    $task->labels()->sync($data['labels']);
+                } else {
+                    $task->labels()->detach();
+                }
+            } else {
                 $task->labels()->sync($data['labels']);
             }
-        } else { // если в форме не выбран ни один лэйбл
-            $task->labels()->detach(); // удаляем все лэйблы у таска
         }
 
         session()->flash('success', __('layout.task.flash_update_success'));

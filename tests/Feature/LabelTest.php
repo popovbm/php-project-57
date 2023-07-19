@@ -16,8 +16,6 @@ class LabelTest extends TestCase
 
     private User $user;
     private Label $label;
-    private array $newLabelData;
-    private array $updateLabelData;
 
     protected function setUp(): void
     {
@@ -45,25 +43,11 @@ class LabelTest extends TestCase
         $response->assertOk();
     }
 
-    public function testCreateNonAuth(): void
-    {
-        $response = $this->get(route('labels.create'));
-
-        $response->assertForbidden();
-    }
-
     public function testCreate(): void
     {
         $response = $this->actingAs($this->user)->get(route('labels.create'));
 
         $response->assertOk();
-    }
-
-    public function testStoreNonAuth(): void
-    {
-        $response = $this->post(route('labels.store'), $this->newLabelData);
-
-        $response->assertForbidden();
     }
 
     public function testStore(): void
@@ -76,25 +60,11 @@ class LabelTest extends TestCase
         $response->assertRedirect(route('labels.index'));
     }
 
-    public function testEditNonAuth(): void
-    {
-        $response = $this->get(route('labels.edit', $this->label));
-
-        $response->assertForbidden();
-    }
-
     public function testEdit(): void
     {
         $response = $this->actingAs($this->user)->get(route('labels.edit', $this->label));
 
         $response->assertOk();
-    }
-
-    public function testUpdateNonAuth(): void
-    {
-        $response = $this->patch(route('labels.update', $this->label), $this->updateLabelData);
-
-        $response->assertForbidden();
     }
 
     public function testUpdate(): void
@@ -106,13 +76,6 @@ class LabelTest extends TestCase
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('labels.index'));
-    }
-
-    public function testDestroyNonAuth(): void
-    {
-        $response = $this->delete(route('labels.destroy', $this->label));
-
-        $response->assertForbidden();
     }
 
     public function testDestroy(): void

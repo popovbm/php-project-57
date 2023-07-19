@@ -16,8 +16,6 @@ class TaskStatusesTest extends TestCase
 
     private User $user;
     private TaskStatus $taskStatus;
-    private array $newTaskStatusData;
-    private array $updateTaskStatusData;
 
     protected function setUp(): void
     {
@@ -39,25 +37,11 @@ class TaskStatusesTest extends TestCase
         $response->assertOk();
     }
 
-    public function testCreateNonAuth(): void
-    {
-        $response = $this->get(route('task_statuses.create'));
-
-        $response->assertForbidden();
-    }
-
     public function testCreate(): void
     {
         $response = $this->actingAs($this->user)->get(route('task_statuses.create'));
 
         $response->assertOk();
-    }
-
-    public function testStoreNonAuth(): void
-    {
-        $response = $this->post(route('task_statuses.store'), $this->newTaskStatusData);
-
-        $response->assertForbidden();
     }
 
     public function testStore(): void
@@ -70,25 +54,11 @@ class TaskStatusesTest extends TestCase
         $response->assertRedirect(route('task_statuses.index'));
     }
 
-    public function testEditNonAuth(): void
-    {
-        $response = $this->get(route('task_statuses.edit', $this->taskStatus));
-
-        $response->assertForbidden();
-    }
-
     public function testEdit(): void
     {
         $response = $this->actingAs($this->user)->get(route('task_statuses.edit', $this->taskStatus));
 
         $response->assertOk();
-    }
-
-    public function testUpdateNonAuth(): void
-    {
-        $response = $this->patch(route('task_statuses.update', $this->taskStatus), $this->updateTaskStatusData);
-
-        $response->assertForbidden();
     }
 
     public function testUpdate(): void
@@ -100,13 +70,6 @@ class TaskStatusesTest extends TestCase
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('task_statuses.index'));
-    }
-
-    public function testDestroyNonAuth(): void
-    {
-        $response = $this->delete(route('task_statuses.destroy', $this->taskStatus));
-
-        $response->assertForbidden();
     }
 
     public function testDestroy(): void

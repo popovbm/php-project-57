@@ -11,9 +11,7 @@
                 <p class="pb-1"><span>{{ __('layout.task.show_name') }}</span>{{ $task->name}}</p>
                 <p class="pb-1"><span>{{ __('layout.task.show_status') }}</span>{{ $task->status->name }}</p>
                 <p class="pb-1"><span>{{ __('layout.task.show_description') }}</span>{{ $task->description }}</p>
-                @if (empty($task->labels->toArray()))
-                <p class="pb-1"><span>{{ __('layout.task.show_labels') }}</span>{{ __('layout.task.show_labels_none') }}</p>
-                @else
+                @if ($task->labels->isNotEmpty())
                 <p class="pb-1"><span>{{ __('layout.task.show_labels') }}</span></p>
                 @foreach ($task->labels as $label)
                 <div class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full">
