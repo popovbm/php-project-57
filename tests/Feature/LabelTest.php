@@ -10,6 +10,10 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Testing\Fakes\Fake;
 use Tests\TestCase;
 
+/**
+ * @property array|\Illuminate\Database\Eloquent\Collection $newLabelData
+ * @property array|\Illuminate\Database\Eloquent\Collection $updateLabelData
+ */
 class LabelTest extends TestCase
 {
     use DatabaseTransactions;

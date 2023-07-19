@@ -10,6 +10,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+/**
+ * @property array|\Illuminate\Database\Eloquent\Collection $newTaskData
+ * @property array|\Illuminate\Database\Eloquent\Collection $updateTaskData
+ */
 class TaskTest extends TestCase
 {
     use DatabaseTransactions;

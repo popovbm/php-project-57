@@ -69,13 +69,13 @@ class TaskController extends Controller
         $task = $request->user()->tasks()->create($data);
 
         if (isset($data['labels'])) {
-            if (in_array(null, $data['labels'])) {
+            if (in_array(null, $data['labels'], false)) {
                 if (count($data['labels']) > 1) {
-                    unset($data['labels'][array_search(null, $data['labels'])]);
+                    unset($data['labels'][array_search(null, $data['labels'], false)]);
+                    $task->labels()->sync($data['labels']);
+                } else {
                     $task->labels()->sync($data['labels']);
                 }
-            } else {
-                $task->labels()->sync($data['labels']);
             }
         }
 
@@ -114,9 +114,9 @@ class TaskController extends Controller
         $task->fill($data)->save();
 
         if (isset($data['labels'])) {
-            if (in_array(null, $data['labels'])) {
+            if (in_array(null, $data['labels'], false)) {
                 if (count($data['labels']) > 1) {
-                    unset($data['labels'][array_search(null, $data['labels'])]);
+                    unset($data['labels'][array_search(null, $data['labels'], false)]);
                     $task->labels()->sync($data['labels']);
                 } else {
                     $task->labels()->detach();

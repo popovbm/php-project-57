@@ -10,6 +10,10 @@ use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+/**
+ * @property array|\Illuminate\Database\Eloquent\Collection $newTaskStatusData
+ * @property array|\Illuminate\Database\Eloquent\Collection $updateTaskStatusData
+ */
 class TaskStatusesTest extends TestCase
 {
     use DatabaseTransactions;
