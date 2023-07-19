@@ -72,10 +72,10 @@ class TaskController extends Controller
             if (in_array(null, $data['labels'], false)) {
                 if (count($data['labels']) > 1) {
                     unset($data['labels'][array_search(null, $data['labels'], false)]);
-                    $task->labels()->sync($data['labels']);
-                } else {
-                    $task->labels()->sync($data['labels']);
+                    $task->labels()->attach($data['labels']);
                 }
+            } else {
+                $task->labels()->attach($data['labels']);
             }
         }
 
