@@ -1,5 +1,3 @@
-
-
 # Task Manager:
 
 Task Manager is a task management system. It allows you to create tasks, assign performers, change their statuses and put labels. Registration and authentication are required to work with the system.
@@ -10,9 +8,9 @@ Task Manager is a task management system. It allows you to create tasks, assign 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/14a38b17c2cdedc59411/test_coverage)](https://codeclimate.com/github/popovbm/php-project-57/test_coverage)
 
 ## Requirements:
- - PHP ^8.1
- - Node.js & npm
- - Sqlite for local
+ - PHP(8.1+)
+ - Node.js(14+) & npm
+ - Sqlite
 
 ## Project setup local
 
@@ -20,6 +18,7 @@ Task Manager is a task management system. It allows you to create tasks, assign 
 git clone git@github.com:popovbm/php-project-57.git
 cd php-project-57
 make setup
+make test
 ```
 
 ## Project start local
@@ -27,5 +26,5 @@ make setup
 ```shell
 make start-app
 ```
-## Try it
+## Working Example
 [Click](https://mytask-manager.up.railway.app/)
